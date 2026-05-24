@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:wght@100..900&family=Montserrat:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+:root {
+  --primary-color: #f5eae1;
+  --accent-color: #b5935a;
+  --text-main: #4a4036;
+  --text-muted: #7a6f66;
+  --bg-white: #ffffff;
+  --bg-soft: #fff2f4;
+  --font-heading: "Great Vibes", serif;
+  --font-script: "Montserrat", cursive;
+  --font-body: "Inter", sans-serif;
+  --spacing-lg: 4rem;
+  --spacing-md: 2rem;
+  --spacing-sm: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-main);
+  background-color: var(--bg-soft);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+section {
+  padding: var(--spacing-lg) var(--spacing-sm);
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn-primary {
+  background-color: #6d071a;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.card {
+  background: white;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Korean Aesthetic Utilities */
+.soft-fade-in {
+  animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 2rem;
+  }
+}
