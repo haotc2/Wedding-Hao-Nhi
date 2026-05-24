@@ -142,7 +142,6 @@ const getDirectLink = (url, width = 1200) => {
  * ==========================================
  */
 const Hero = ({ remoteConfig }) => {
-  const [showPhonePopup, setShowPhonePopup] = React.useState(false);
 
   // Lấy sự kiện nhà trai để hiển thị ở Hero
   const mainEvent = React.useMemo(() => {
@@ -200,12 +199,6 @@ const Hero = ({ remoteConfig }) => {
         <div className="hero-bottom-icons">
           <button
             className="glass-icon-btn"
-            onClick={() => setShowPhonePopup(true)}
-          >
-            📞
-          </button>
-          <button
-            className="glass-icon-btn"
             onClick={() =>
               window.scrollTo({
                 top: document.querySelector(".couple").offsetTop,
@@ -227,46 +220,6 @@ const Hero = ({ remoteConfig }) => {
           </button>
         </div>
       </div>
-
-      {showPhonePopup && (
-        <div
-          className="lightbox-overlay popup-overlay"
-          style={{ zIndex: 10000 }}
-          onClick={() => setShowPhonePopup(false)}
-        >
-          <div
-            className="popup-content card"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="popup-close"
-              onClick={() => setShowPhonePopup(false)}
-            >
-              ✕
-            </button>
-            <h3 className="couple-title" style={{ fontSize: "2rem" }}>
-              LIÊN HỆ
-            </h3>
-            <div className="phone-list">
-              <a href={`tel:${config.groom.phone}`} className="phone-item">
-                <div className="phone-info">
-                  <span className="phone-name">{config.groom.name}:</span>
-                </div>
-                <strong className="phone-number">{config.groom.phone}</strong>
-              </a>
-              <a href={`tel:${config.bride.phone}`} className="phone-item">
-                <div className="phone-info">
-                  <span className="phone-name full-name-text">
-                    {config.bride.name}:
-                  </span>
-                  <span className="phone-name short-name-text">Ph. Nhi:</span>
-                </div>
-                <strong className="phone-number">{config.bride.phone}</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
@@ -333,7 +286,6 @@ const Couple = ({ remoteConfig }) => {
             <div className="card-overlay-gradient"></div>
             <div className="card-content">
               <h3 className="card-name">{config.groom.name}</h3>
-              <p className="card-date">{config.groom.birthDate}</p>
               <p className="card-bio">{config.groom.bio}</p>
               {/* <div className="card-socials">
                 <button className="social-icon-btn">📞</button>
@@ -351,7 +303,6 @@ const Couple = ({ remoteConfig }) => {
             <div className="card-overlay-gradient"></div>
             <div className="card-content">
               <h3 className="card-name">{config.bride.name}</h3>
-              <p className="card-date">{config.bride.birthDate}</p>
               <p className="card-bio">{config.bride.bio}</p>
               {/* <div className="card-socials">
                 <button className="social-icon-btn">📞</button>
@@ -475,7 +426,6 @@ const Gallery = ({ remoteGallery }) => {
  * ==========================================
  */
 const Events = ({ remoteConfig }) => {
-  const [showPhonePopup, setShowPhonePopup] = useState(false);
 
   return (
     <>
@@ -566,12 +516,6 @@ const Events = ({ remoteConfig }) => {
                   <div className="event-social-icons-new">
                     <button
                       className="event-icon-circle"
-                      onClick={() => setShowPhonePopup(true)}
-                    >
-                      📞
-                    </button>
-                    <button
-                      className="event-icon-circle"
                       onClick={() =>
                         window.open(
                           `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`,
@@ -587,44 +531,6 @@ const Events = ({ remoteConfig }) => {
           })}
       </div>
 
-      {/* Phone Popup Modal */}
-      {showPhonePopup && (
-        <div
-          className="lightbox-overlay popup-overlay"
-          onClick={() => setShowPhonePopup(false)}
-        >
-          <div
-            className="popup-content card"
-            onClick={(e) => e.stopPropagation()}
-            data-aos="zoom-in"
-          >
-            <button
-              className="popup-close"
-              onClick={() => setShowPhonePopup(false)}
-            >
-              ✕
-            </button>
-            <h3 className="couple-title">Liên hệ</h3>
-            <div className="phone-list">
-              <a href={`tel:${config.groom.phone}`} className="phone-item">
-                <div className="phone-info">
-                  <span className="phone-name">{config.groom.name}:</span>
-                </div>
-                <strong className="phone-number">{config.groom.phone}</strong>
-              </a>
-              <a href={`tel:${config.bride.phone}`} className="phone-item">
-                <div className="phone-info">
-                  <span className="phone-name full-name-text">
-                    {config.bride.name}:
-                  </span>
-                  <span className="phone-name short-name-text">Ph.Nhi:</span>
-                </div>
-                <strong className="phone-number">{config.bride.phone}</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

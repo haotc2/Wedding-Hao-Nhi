@@ -6,8 +6,6 @@ export const config = {
   audioUrl: "结婚进行曲.mp3", // Background music
   groom: {
     name: "Chí Hào",
-    birthDate: "21/10/1995",
-    phone: "0772004496",
     bio: "Trưởng Nam",
     image:
       "",
@@ -16,8 +14,7 @@ export const config = {
   },
   bride: {
     name: "Phương Nhi",
-    birthDate: "31/08/1993",
-    phone: "0976669860",
+
     bio: "Trưởng Nữ",
     image:
       "",
