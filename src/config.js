@@ -8,21 +8,21 @@ export const config = {
     name: "Chí Hào",
     birthDate: "21/10/1995",
     phone: "0772004496",
-    bio: "Chú rể là người cởi mở, thân thiện, giao tiếp tốt và thuộc tuýp người hướng ngoại.",
+    bio: "Trưởng Nam",
     image:
       "",
-    father: "Tạ Văn A", // Điền tên Bố chú rể
-    mother: "Nguyễn Thị B", // Điền tên Mẹ chú rể
+    father: "Tạ Vĩnh Đức", // Điền tên Bố chú rể
+    mother: "Hứa Huệ Huê", // Điền tên Mẹ chú rể
   },
   bride: {
     name: "Phương Nhi",
     birthDate: "31/08/1993",
     phone: "0976669860",
-    bio: "Cô dâu thuộc tuýp người hướng nội. Sở thích nấu nướng, làm đẹp và đi du lịch.",
+    bio: "Trưởng Nữ",
     image:
       "",
-    father: "Nguyễn Văn C", // Điền tên Bố cô dâu
-    mother: "Lê Thị D", // Điền tên Mẹ cô dâu
+    father: "Nguyễn Hữu Triều", // Điền tên Bố cô dâu
+    mother: "Trần Thị Phương Mai", // Điền tên Mẹ cô dâu
   },
   weddingDate: "2026-11-29T18:00:00", // Using 2026 to keep countdown active
   events: [
