@@ -405,7 +405,7 @@ const Gallery = ({ remoteGallery }) => {
             &#10094;
           </button>
           <img
-            src={images[selectedIndex]}
+            src={getDirectLink(images[selectedIndex], 1600)}
             alt="Enlarged"
             className="lightbox-img"
             onClick={(e) => e.stopPropagation()}
