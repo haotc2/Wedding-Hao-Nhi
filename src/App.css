@@ -320,13 +320,26 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 1000px;
+  max-width: 950px;
   margin: 0 auto 3.5rem;
-  padding: 2rem;
-  background: #fdfaf7;
+  padding: 3rem 1.5rem;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  position: relative;
+}
+
+.parents-block::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(197, 160, 89, 0.5);
   border-radius: 12px;
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  pointer-events: none;
 }
 
 .parents-side {
@@ -336,54 +349,72 @@ body {
 
 .parents-title {
   display: block;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  color: #c5a059;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  color: #b5935a;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .parents-names {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
-  color: #333;
-  margin: 0.3rem 0;
+  font-size: 1.3rem;
+  color: #555;
+  margin: 0.6rem 0;
+  font-style: italic;
 }
 
 .parents-names strong {
-  font-weight: 500;
+  font-weight: 600;
   color: #6d071a;
+  font-size: 1.5rem;
+  font-style: normal;
+  margin-left: 0.3rem;
 }
 
 .parents-divider-heart {
-  font-size: 2.2rem;
-  color: #6d071a;
-  padding: 0 2rem;
+  font-size: 3.5rem;
+  color: rgba(109, 7, 26, 0.85);
+  padding: 0 1.5rem;
   font-family: var(--font-heading);
 }
 
 @media (max-width: 768px) {
   .parents-block {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    padding: 2.5rem 1rem;
     margin-bottom: 2.5rem;
+    border-radius: 16px;
+  }
+
+  .parents-block::before {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border-radius: 10px;
   }
 
   .parents-title {
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
-    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 2.5px;
+    margin-bottom: 1rem;
   }
 
   .parents-names {
-    font-size: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .parents-names strong {
+    font-size: 1.3rem;
   }
 
   .parents-divider-heart {
-    padding: 0.5rem 0;
-    font-size: 2rem;
+    padding: 0;
+    font-size: 2.5rem;
   }
 }
 
@@ -1129,30 +1160,99 @@ body {
 }
 
 .bank-card.card {
-  background: #fcf9f7;
+  background: #ffffff;
   padding: 2.5rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  position: relative;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bank-card.card:hover {
+  transform: translateY(-5px);
 }
 
 .bank-card h3 {
   color: #6d071a;
+  font-family: var(--font-heading);
   font-size: 1.6rem;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
-.bank-card p {
-  color: #3d2b1f;
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  opacity: 0.9;
+.bank-name {
+  color: #b5935a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
 }
 
-.bank-card p:last-of-type {
+.bank-account {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
   font-weight: 700;
   color: #6d071a;
+  margin: 1rem 0;
+  letter-spacing: 1px;
+}
+
+.bank-owner {
+  color: #3d2b1f;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #c5a059 0%, #b5935a 100%);
+  color: white;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 85%;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(181, 147, 90, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.copy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 147, 90, 0.6);
+  background: linear-gradient(135deg, #d4b26a 0%, #c5a059 100%);
+}
+
+.copy-btn.copied {
+  background: #6d071a;
+  box-shadow: 0 4px 15px rgba(109, 7, 26, 0.4);
+}
+
+.copy-btn .copy-icon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.copy-btn.copied .copy-icon {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
 }
 
 .footer {
@@ -1590,7 +1690,7 @@ body {
   line-height: 1;
   user-select: none;
   animation: hy-pulse-busy 2s ease-in-out infinite;
-  font-family: serif;
+  font-family: var(--font-heading);
 }
 
 .loading-progress-container {

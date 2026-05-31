@@ -287,12 +287,6 @@ const Couple = ({ remoteConfig }) => {
             <div className="card-content">
               <h3 className="card-name">{config.groom.name}</h3>
               <p className="card-bio">{config.groom.bio}</p>
-              {/* <div className="card-socials">
-                <button className="social-icon-btn">📞</button>
-                <button className="social-icon-btn">f</button>
-                <button className="social-icon-btn">𝕏</button>
-                <button className="social-icon-btn">📸</button>
-              </div> */}
             </div>
           </div>
           <div
@@ -304,12 +298,6 @@ const Couple = ({ remoteConfig }) => {
             <div className="card-content">
               <h3 className="card-name">{config.bride.name}</h3>
               <p className="card-bio">{config.bride.bio}</p>
-              {/* <div className="card-socials">
-                <button className="social-icon-btn">📞</button>
-                <button className="social-icon-btn">f</button>
-                <button className="social-icon-btn">𝕏</button>
-                <button className="social-icon-btn">📸</button>
-              </div> */}
             </div>
           </div>
         </div>
@@ -742,30 +730,71 @@ const RSVP = () => {
  * Direct banking information for gifting
  * ==========================================
  */
-const BankInfo = () => (
-  <section className="bank-info-section">
-    <div className="container">
-      <h2 data-aos="fade-up">
-        Gửi quà đến{" "}
-        <span style={{ display: "inline-block" }}>Cô dâu & Chú rể</span>
-      </h2>
-      <div className="bank-grid">
-        <div className="bank-card card" data-aos="flip-left">
-          <h3>Mừng cưới <span style={{ display: "inline-block" }}>Chú rể</span></h3>
-          <p>{config.bankInfo.groom.bank}</p>
-          <p>STK: {config.bankInfo.groom.accountNumber}</p>
-          <p>Tên: {config.bankInfo.groom.accountName}</p>
-        </div>
-        <div className="bank-card card" data-aos="flip-right">
-          <h3>Mừng cưới <span style={{ display: "inline-block" }}>Cô dâu</span></h3>
-          <p>{config.bankInfo.bride.bank}</p>
-          <p>STK: {config.bankInfo.bride.accountNumber}</p>
-          <p>Tên: {config.bankInfo.bride.accountName}</p>
+const BankInfo = () => {
+  const [copiedGroom, setCopiedGroom] = useState(false);
+  const [copiedBride, setCopiedBride] = useState(false);
+
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text).then(() => {
+      if (type === "groom") {
+        setCopiedGroom(true);
+        setTimeout(() => setCopiedGroom(false), 2000);
+      } else {
+        setCopiedBride(true);
+        setTimeout(() => setCopiedBride(false), 2000);
+      }
+    });
+  };
+
+  return (
+    <section className="bank-info-section">
+      <div className="container">
+        <h2 data-aos="fade-up">
+          Gửi quà đến{" "}
+          <span style={{ display: "inline-block" }}>Cô dâu & Chú rể</span>
+        </h2>
+        <div className="bank-grid">
+          <div className="bank-card card" data-aos="flip-left">
+            <h3>
+              Mừng cưới{" "}
+              <span style={{ display: "inline-block" }}>Chú rể</span>
+            </h3>
+            <p className="bank-name">{config.bankInfo.groom.bank}</p>
+            <p className="bank-account">STK: {config.bankInfo.groom.accountNumber}</p>
+            <p className="bank-owner">Tên: {config.bankInfo.groom.accountName}</p>
+            <button
+              className={`copy-btn ${copiedGroom ? "copied" : ""}`}
+              onClick={() =>
+                handleCopy(config.bankInfo.groom.accountNumber, "groom")
+              }
+            >
+              <span className="copy-icon"></span>
+              {copiedGroom ? "ĐÃ SAO CHÉP" : "SAO CHÉP SỐ TÀI KHOẢN"}
+            </button>
+          </div>
+          <div className="bank-card card" data-aos="flip-right">
+            <h3>
+              Mừng cưới{" "}
+              <span style={{ display: "inline-block" }}>Cô dâu</span>
+            </h3>
+            <p className="bank-name">{config.bankInfo.bride.bank}</p>
+            <p className="bank-account">STK: {config.bankInfo.bride.accountNumber}</p>
+            <p className="bank-owner">Tên: {config.bankInfo.bride.accountName}</p>
+            <button
+              className={`copy-btn ${copiedBride ? "copied" : ""}`}
+              onClick={() =>
+                handleCopy(config.bankInfo.bride.accountNumber, "bride")
+              }
+            >
+              <span className="copy-icon"></span>
+              {copiedBride ? "ĐÃ SAO CHÉP" : "SAO CHÉP SỐ TÀI KHOẢN"}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /**
  * ==========================================
@@ -913,7 +942,7 @@ function App() {
   return (
     <div className="App">
       <LoadingScreen progress={loadingProgress} isFinished={!isLoading} />
-      {/* <MusicPlayer /> */}
+      <MusicPlayer />
       <Hero remoteConfig={remoteData.config} />
       <Couple remoteConfig={remoteData.config} />
       <Gallery remoteGallery={remoteData.gallery} />

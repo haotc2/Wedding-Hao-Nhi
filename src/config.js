@@ -3,7 +3,7 @@ export const config = {
     "", // Background for Hero section
   footerBackground:
     "", // Background for Footer section fallback
-  audioUrl: "结婚进行曲.mp3", // Background music
+  audioUrl: "Beautiful In White.mp3", // Background music
   groom: {
     name: "Chí Hào",
     bio: "Trưởng Nam",
