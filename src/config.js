@@ -11,15 +11,16 @@ export const config = {
       "",
     father: "Tạ Vĩnh Đức", // Điền tên Bố chú rể
     mother: "Hứa Huệ Huê", // Điền tên Mẹ chú rể
+    address: "Phường Bình Tây, TP.Hồ Chí Minh"
   },
   bride: {
     name: "Phương Nhi",
-
     bio: "Trưởng Nữ",
     image:
       "",
     father: "Nguyễn Hữu Triều", // Điền tên Bố cô dâu
     mother: "Trần Thị Phương Mai", // Điền tên Mẹ cô dâu
+    address: "Phường Trấn Biên, TP.Đồng Nai"
   },
   weddingDate: "2026-11-29T18:00:00", // Using 2026 to keep countdown active
   events: [

@@ -7,8 +7,8 @@
   --text-muted: #7a6f66;
   --bg-white: #ffffff;
   --bg-soft: #fff2f4;
-  --font-heading: "Playfair Display", serif;
-  --font-script: "Dancing Script", cursive;
+  --font-heading: "Montserrat", sans-serif;
+  --font-script: "Montserrat", sans-serif;
   --font-body: "Montserrat", sans-serif;
   --spacing-lg: 4rem;
   --spacing-md: 2rem;
@@ -91,5 +91,14 @@ section {
 @media (max-width: 768px) {
   :root {
     --spacing-lg: 2rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    white-space: nowrap !important;
+    font-size: clamp(1.5rem, 5.5vw, 2.5rem) !important;
+    letter-spacing: 1px !important;
   }
 }

@@ -63,7 +63,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 3.5rem 2rem;
   width: 100%;
-  max-width: 450px;
+  max-width: 700px;
   border-radius: 12px;
   text-align: center;
   color: white;
@@ -83,10 +83,10 @@ body {
 
 .hero-name-text {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
+  font-size: 5rem;
   font-weight: 500;
   margin: 0;
-  line-height: 1.1;
+  line-height: 2;
   letter-spacing: -1px;
 }
 
@@ -108,7 +108,7 @@ body {
 }
 
 .date-item.side {
-  font-size: 0.7rem;
+  font-size: 2rem;
   letter-spacing: 2px;
   flex: 1;
   text-align: center;
@@ -135,8 +135,8 @@ body {
 }
 
 .day-number {
-  font-family: var(--font-heading);
-  font-size: 4rem;
+  font-family: var(--font-body);
+  font-size: 7rem;
   font-weight: 500;
 }
 
@@ -208,28 +208,27 @@ body {
 }
 
 .music-toggle-new {
-  width: 40px;
-  height: 40px;
+  width: clamp(55px, 6vw, 90px);
+  height: clamp(55px, 6vw, 90px);
   border-radius: 50%;
   border: none;
-  background-color: #633f28;
+  background-color: transparent;
   cursor: pointer;
-  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   transition: all 0.3s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  animation: rotate 5s linear infinite;
+  animation-play-state: paused;
 }
 
 .music-toggle-new:hover {
-  background-color: #8a5a3a;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .music-toggle-new.playing {
-  animation: rotate 5s linear infinite;
+  animation-play-state: running;
 }
 
 /* ==========================================
@@ -374,10 +373,17 @@ body {
   margin-left: 0.3rem;
 }
 
+.parents-address {
+  font-size: 0.95rem;
+  color: #777;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
 .parents-divider-heart {
-  font-size: 3.5rem;
+  font-size: 2rem;
   color: rgba(109, 7, 26, 0.85);
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   font-family: var(--font-heading);
 }
 
@@ -413,8 +419,181 @@ body {
   }
 
   .parents-divider-heart {
-    padding: 0;
-    font-size: 2.5rem;
+    padding: 0 0.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* Classic Invite Specifics */
+.classic-parent-title {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.classic-parent-name {
+  color: #8c0000;
+  font-weight: bold;
+  margin: 0.4rem 0;
+  font-size: 1rem;
+}
+
+.classic-parent-address {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.8rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .classic-parent-title {
+    font-size: 0.65rem;
+  }
+
+  .classic-parent-name {
+    font-size: 0.7rem;
+  }
+
+  .classic-parent-address {
+    font-size: 0.65rem;
+    margin-top: 0.4rem;
+  }
+}
+
+/* Classic Invite Announce Text */
+.classic-announce-text {
+  color: #8c0000;
+  font-size: 1.8rem;
+  margin: 0.4rem 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.mobile-break {
+  display: none;
+}
+
+.classic-ceremony-time {
+  color: #777;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .classic-announce-text {
+    font-size: clamp(0.5rem, 3.5vw, 0.9rem);
+  }
+
+  .mobile-break {
+    display: block;
+  }
+
+  .classic-ceremony-time {
+    font-size: 0.8rem;
+  }
+}
+
+/* Classic Date Row */
+.classic-date-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto 1fr;
+  align-items: center;
+  margin: 2rem 0;
+  color: #777;
+  width: 100%;
+}
+
+.classic-date-side {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.classic-day-short {
+  display: none;
+}
+
+.classic-date-side:first-child {
+  justify-self: end;
+  text-align: right;
+}
+
+.classic-date-side:last-child {
+  justify-self: start;
+  text-align: left;
+}
+
+.classic-date-divider {
+  width: 1px;
+  height: 30px;
+  background-color: #ccc;
+  margin: 0 1rem;
+}
+
+.classic-date-big {
+  font-size: 3rem;
+  color: #8c0000;
+  font-family: var(--font-body);
+  line-height: 1;
+}
+
+.classic-year {
+  color: #777;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.classic-lunar {
+  color: #777;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .classic-date-side {
+    font-size: 0.7rem;
+  }
+
+  .classic-day-full {
+    display: none;
+  }
+
+  .classic-day-short {
+    display: inline;
+  }
+
+  .classic-date-divider {
+    height: 20px;
+    margin: 0 0.6rem;
+  }
+
+  .classic-date-big {
+    font-size: 2rem;
+  }
+
+  .classic-year {
+    font-size: 0.9rem;
+  }
+
+  .classic-lunar {
+    font-size: 0.65rem;
+  }
+}
+
+/* Vertical line divider between parents */
+.classic-divider-line {
+  flex-shrink: 0;
+  width: 1px;
+  background-color: #8c0000;
+  align-self: stretch;
+  margin: 0 0.8rem;
+  min-height: 120px;
+}
+
+@media (max-width: 768px) {
+  .classic-divider-line {
+    margin: 0 0.5rem;
+    min-height: 100px;
   }
 }
 
@@ -865,24 +1044,12 @@ body {
 }
 
 .date-day-large {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 5.5rem;
   font-weight: 700;
   color: #3d2b1f;
   line-height: 0.8;
   letter-spacing: -3px;
-  display: inline-block;
-}
-
-.date-slash {
-  font-family: var(--font-body);
-  font-size: 4.8rem;
-  font-weight: 400;
-  color: rgba(197, 160, 89, 0.7);
-  margin: 0 -0.5rem;
-  line-height: 0.8;
-  opacity: 0.8;
-  transform: scaleX(0.5);
   display: inline-block;
 }
 
@@ -1210,6 +1377,44 @@ body {
   font-size: 0.95rem;
 }
 
+.moving-btn {
+  background: linear-gradient(135deg, #6d071a 0%, #b5935a 100%);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(181, 147, 90, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.moving-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 147, 90, 0.6);
+}
+
+.event-map-embed {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.event-map-embed iframe {
+  display: block;
+}
+
 .copy-btn {
   background: linear-gradient(135deg, #c5a059 0%, #b5935a 100%);
   color: white;
@@ -1257,9 +1462,10 @@ body {
 
 .footer {
   position: relative;
-  min-height: 480px;
+  min-height: 650px;
   background-size: cover;
-  background-position: bottom;
+  /* Chỉnh vị trí ảnh ở desktop (vd: center, center top, hoặc theo %) */
+  background-position: center 15%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1291,6 +1497,11 @@ body {
 
 /* MEDIA */
 @media (max-width: 768px) {
+  .footer {
+    /* Chỉnh vị trí ảnh trên điện thoại để hiện rõ mặt (vd: center 20%, top, center, ...) */
+    background-position: center 20%;
+  }
+
   .script-name {
     font-size: 3.5rem;
   }
@@ -1392,11 +1603,6 @@ body {
     letter-spacing: -3px;
   }
 
-  .date-slash {
-    font-size: 3rem;
-    margin: 0 -0.2rem;
-  }
-
   .date-box-side {
     min-width: 70px;
     padding: 0.5rem 0;
@@ -1436,6 +1642,11 @@ body {
   .hero-date-block {
     margin: 1.5rem 0;
     padding: 0.5rem 0;
+  }
+
+  .date-item.side {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
   }
 
   .day-number {
@@ -1680,12 +1891,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 7rem;
 }
 
 
 .hy-symbol-busy {
-  font-size: 12rem;
+  font-size: 20rem;
   color: #ff0000;
   line-height: 1;
   user-select: none;
@@ -1756,10 +1967,11 @@ body {
   .busy-container {
     width: 140px;
     height: 140px;
+    margin-bottom: 4rem;
   }
 
   .hy-symbol-busy {
-    font-size: 8rem;
+    font-size: 10rem;
   }
 
   .loading-progress-container {

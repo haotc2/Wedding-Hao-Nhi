@@ -30,7 +30,7 @@ const LoadingScreen = ({ progress, isFinished }) => {
         <div className="hy-symbol-busy">囍</div>
       </div>
       <div className="loading-progress-container">
-        <p className="loading-text">Đang chuẩn bị... {progress}%</p>
+        <p className="loading-text">Loading... {progress}%</p>
         <div className="loading-bar-bg">
           <div className="loading-bar-fill" style={{ width: `${progress}%` }}></div>
         </div>
@@ -87,7 +87,11 @@ const MusicPlayer = () => {
         className={`music-toggle-new ${isPlaying ? "playing" : ""}`}
         onClick={togglePlay}
       >
-        {isPlaying ? "🎵" : "🔇"}
+        <img
+          src={`${import.meta.env.BASE_URL}play-icon-29.png`}
+          alt="Music toggle"
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        />
       </button>
     </div>
   );
@@ -142,8 +146,6 @@ const getDirectLink = (url, width = 1200) => {
  * ==========================================
  */
 const Hero = ({ remoteConfig }) => {
-
-  // Lấy sự kiện nhà trai để hiển thị ở Hero
   const mainEvent = React.useMemo(() => {
     const groomEvent = config.events.find((ev) => ev.title.includes("NHÀ TRAI"));
     return groomEvent || config.events[0];
@@ -183,41 +185,11 @@ const Hero = ({ remoteConfig }) => {
             <span className="day-number">
               {day}.{month}
             </span>
-            <span className="month-year">{year}</span>
           </div>
-          <div className="date-item side">
-            {mainEvent.time.replace(":", "H")}
-          </div>
-        </div>
-
-        <div className="hero-location-block">
-          <p className="location-intro">Địa điểm tổ chức</p>
-          <h2 className="location-name">{mainEvent.location}</h2>
-          <p className="location-address">{mainEvent.address}</p>
+          <div className="date-item side">{year}</div>
         </div>
 
         <div className="hero-bottom-icons">
-          <button
-            className="glass-icon-btn"
-            onClick={() =>
-              window.scrollTo({
-                top: document.querySelector(".couple").offsetTop,
-                behavior: "smooth",
-              })
-            }
-          >
-            🏠
-          </button>
-          <button
-            className="glass-icon-btn"
-            onClick={() =>
-              window.open(
-                `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mainEvent.address)}`,
-              )
-            }
-          >
-            📍
-          </button>
         </div>
       </div>
     </section>
@@ -244,62 +216,86 @@ const Couple = ({ remoteConfig }) => {
 
   const groomFather = remoteConfig?.groomfather || config.groom.father;
   const groomMother = remoteConfig?.groommother || config.groom.mother;
+  const groomAddress = remoteConfig?.groomaddress || config.groom.address;
   const brideFather = remoteConfig?.bridefather || config.bride.father;
   const brideMother = remoteConfig?.bridemother || config.bride.mother;
+  const brideAddress = remoteConfig?.brideaddress || config.bride.address;
+
+  const eventData = config.events.find((ev) => ev.title.includes("NHÀ TRAI")) || config.events[0];
+  const [day, month] = eventData.dayMonth.split('/');
 
   return (
     <section className="couple bg-white">
       <div className="container">
-        <div className="couple-header" data-aos="fade-up" style={{ position: "relative" }}>
-          <p className="intro-text">GIỚI THIỆU</p>
-          <h2 className="couple-title">CÔ DÂU VÀ CHÚ RỂ</h2>
-        </div>
 
-        <div className="parents-block" data-aos="fade-up">
-          <div className="parents-side groom-parents">
-            <span className="parents-title">ĐẠI DIỆN NHÀ TRAI</span>
-            <p className="parents-names">
-              Ông: <strong>{groomFather}</strong>
-            </p>
-            <p className="parents-names">
-              Bà: <strong>{groomMother}</strong>
-            </p>
-          </div>
-          <div className="parents-divider-heart">囍</div>
-          <div className="parents-side bride-parents">
-            <span className="parents-title">ĐẠI DIỆN NHÀ GÁI</span>
-            <p className="parents-names">
-              Ông: <strong>{brideFather}</strong>
-            </p>
-            <p className="parents-names">
-              Bà: <strong>{brideMother}</strong>
-            </p>
-          </div>
-        </div>
+        <div className="classic-invite-wrapper" data-aos="fade-up" style={{ textAlign: "center", backgroundColor: "#fdf7ee", padding: "2rem 1rem", border: "1px solid #eaddd3", borderRadius: "20px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
+          {/* Parents Block */}
+          <h2 className="couple-title" data-aos="fade-up" style={{ marginBottom: "3rem" }}>
+            THÔNG TIN LỄ CƯỚI
+          </h2>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", marginBottom: "3rem", gap: "0", flexWrap: "nowrap" }}>
+            <div style={{ flex: "1", minWidth: "0" }}>
+              <span className="classic-parent-title">Ông Bà</span>
+              <p className="classic-parent-name">{groomFather}</p>
+              <p className="classic-parent-name">{groomMother}</p>
+              <p className="classic-parent-address">{groomAddress}</p>
+            </div>
 
-        <div className="couple-grid-new">
-          <div
-            className="couple-card"
-            data-aos="fade-right"
-            style={{ backgroundImage: `url(${groomImage})` }}
-          >
-            <div className="card-overlay-gradient"></div>
-            <div className="card-content">
-              <h3 className="card-name">{config.groom.name}</h3>
-              <p className="card-bio">{config.groom.bio}</p>
+            <div className="classic-divider-line"></div>
+
+            <div style={{ flex: "1", minWidth: "0" }}>
+              <span className="classic-parent-title">Ông Bà</span>
+              <p className="classic-parent-name">{brideFather}</p>
+              <p className="classic-parent-name">{brideMother}</p>
+              <p className="classic-parent-address">{brideAddress}</p>
             </div>
           </div>
-          <div
-            className="couple-card"
-            data-aos="fade-left"
-            style={{ backgroundImage: `url(${brideImage})` }}
-          >
-            <div className="card-overlay-gradient"></div>
-            <div className="card-content">
-              <h3 className="card-name">{config.bride.name}</h3>
-              <p className="card-bio">{config.bride.bio}</p>
+
+          <div style={{ marginBottom: "3rem" }}>
+            <p className="classic-announce-text">TRÂN TRỌNG BÁO TIN</p>
+            <p className="classic-announce-text">LỄ THÀNH HÔN CỦA CON CHÚNG TÔI</p>
+          </div>
+
+          <div className="couple-grid-new" style={{ marginBottom: "3rem" }}>
+            <div
+              className="couple-card"
+              data-aos="fade-right"
+              style={{ backgroundImage: `url(${groomImage})` }}
+            >
+              <div className="card-overlay-gradient"></div>
+              <div className="card-content">
+                <h3 className="card-name">{config.groom.name}</h3>
+                <p className="card-bio">{config.groom.bio}</p>
+              </div>
+            </div>
+            <div
+              className="couple-card"
+              data-aos="fade-left"
+              style={{ backgroundImage: `url(${brideImage})` }}
+            >
+              <div className="card-overlay-gradient"></div>
+              <div className="card-content">
+                <h3 className="card-name">{config.bride.name}</h3>
+                <p className="card-bio">{config.bride.bio}</p>
+              </div>
             </div>
           </div>
+
+          <div style={{ marginBottom: "3rem" }}>
+            <p className="classic-announce-text">
+              LỄ TÂN HÔN ĐƯỢC CỬ HÀNH <br className="mobile-break" /> TẠI TƯ GIA
+            </p>
+            <p className="classic-ceremony-time">VÀO LÚC 9:00</p>
+          </div>
+
+          <div className="classic-date-row">
+            <span className="classic-date-side">C.NHẬT</span>
+            <div className="classic-date-divider"></div>
+            <span className="classic-date-big">{day}.{month}</span>
+            <div className="classic-date-divider"></div>
+            <span className="classic-date-side">{eventData.year}</span>
+          </div>
+          <p className="classic-lunar">(TỨC NGÀY {eventData.lunarDate.toUpperCase()})</p>
         </div>
       </div>
     </section>
@@ -414,112 +410,108 @@ const Gallery = ({ remoteGallery }) => {
  * ==========================================
  */
 const Events = ({ remoteConfig }) => {
-
   return (
-    <>
-      <div className="events-container-new">
-        {config.events
-          .filter((ev) => ev.title.includes("NHÀ TRAI"))
-          .map((event) => {
-            const originalIdx = config.events.indexOf(event);
-            const [day, month] = event.dayMonth.split("/");
-            const remoteKey = `event${originalIdx + 1}image`;
-            const eventImage = getDirectLink(
-              remoteConfig?.[remoteKey] || event.image,
-              800,
-            );
+    <div className="events-container-new">
+      {config.events
+        .filter((ev) => ev.title.includes("NHÀ TRAI"))
+        .map((event) => {
+          const originalIdx = config.events.indexOf(event);
+          const [day, month] = event.dayMonth.split("/");
+          const remoteKey = `event${originalIdx + 1}image`;
+          const eventImage = getDirectLink(
+            remoteConfig?.[remoteKey] || event.image,
+            800,
+          );
+          return (
+            <div
+              key={originalIdx}
+              className="event-card-new"
+              data-aos="fade-up"
+              data-aos-delay={0}
+            >
+              <div className="event-arch-wrapper">
+                <img
+                  src={eventImage}
+                  alt={event.title}
+                  className="event-arch-img-new"
+                />
+              </div>
 
-            return (
-              <div
-                key={originalIdx}
-                className="event-card-new"
-                data-aos="fade-up"
-                data-aos-delay={0}
-              >
-                <div className="event-arch-wrapper">
-                  <img
-                    src={eventImage}
-                    alt={event.title}
-                    className="event-arch-img-new"
-                  />
+              <div className="event-info-new">
+                <h3 className="event-card-title">
+                  {event.title.includes("NHÀ") ? (
+                    <>
+                      {event.title.split("NHÀ")[0]}
+                      <span style={{ display: "inline-block" }}>
+                        NHÀ {event.title.split("NHÀ")[1]}
+                      </span>
+                    </>
+                  ) : (
+                    event.title
+                  )}
+                </h3>
+                <p className="event-location-name-new">{event.location}</p>
+                <p className="event-address-new">
+                  {(() => {
+                    const parts = event.address.split(",");
+                    const street = parts[0];
+                    const rest = parts.slice(1).join(",");
+                    return (
+                      <>
+                        <span className="address-street">
+                          {street.trim()}
+                          {parts.length > 1 ? "," : ""}
+                        </span>{" "}
+                        <span className="address-location">{rest.trim()}</span>
+                      </>
+                    );
+                  })()}
+                </p>
+                <p className="event-time-new">
+                  Vào lúc <strong>{event.time}</strong>
+                </p>
+
+                <div className="event-date-row-new">
+                  <div className="date-box-side">
+                    <span className="date-day-week full-day">
+                      {event.dayOfWeek}
+                    </span>
+                    <span className="date-day-week short-day">
+                      {event.dayOfWeek === "Chủ Nhật"
+                        ? "C. Nhật"
+                        : event.dayOfWeek}
+                    </span>
+                  </div>
+                  <div className="date-center-main">
+                    <span className="date-day-large">{day}.{month}</span>
+                  </div>
+                  <div className="date-box-side">
+                    <span className="date-year-small">{event.year}</span>
+                  </div>
                 </div>
 
-                <div className="event-info-new">
-                  <h3 className="event-card-title">
-                    {event.title.includes("NHÀ") ? (
-                      <>
-                        {event.title.split("NHÀ")[0]}
-                        <span style={{ display: "inline-block" }}>
-                          NHÀ {event.title.split("NHÀ")[1]}
-                        </span>
-                      </>
-                    ) : (
-                      event.title
-                    )}
-                  </h3>
-                  <p className="event-location-name-new">{event.location}</p>
-                  <p className="event-address-new">
-                    {(() => {
-                      const parts = event.address.split(",");
-                      const street = parts[0];
-                      const rest = parts.slice(1).join(",");
-                      return (
-                        <>
-                          <span className="address-street">
-                            {street.trim()}
-                            {parts.length > 1 ? "," : ""}
-                          </span>{" "}
-                          <span className="address-location">{rest.trim()}</span>
-                        </>
-                      );
-                    })()}
-                  </p>
-                  <p className="event-time-new">
-                    Vào lúc <strong>{event.time}</strong>
-                  </p>
+                <p className="event-lunar-new">Nhằm ngày {event.lunarDate}</p>
 
-                  <div className="event-date-row-new">
-                    <div className="date-box-side">
-                      <span className="date-day-week full-day">
-                        {event.dayOfWeek}
-                      </span>
-                      <span className="date-day-week short-day">
-                        {event.dayOfWeek === "Chủ Nhật"
-                          ? "C. Nhật"
-                          : event.dayOfWeek}
-                      </span>
-                    </div>
-                    <div className="date-center-main">
-                      <span className="date-day-large">{day}</span>
-                      <span className="date-slash">/</span>
-                      <span className="date-day-large">{month}</span>
-                    </div>
-                    <div className="date-box-side">
-                      <span className="date-year-small">{event.year}</span>
-                    </div>
-                  </div>
 
-                  <p className="event-lunar-new">Nhằm ngày {event.lunarDate}</p>
 
-                  <div className="event-social-icons-new">
-                    <button
-                      className="event-icon-circle"
-                      onClick={() =>
-                        window.open(
-                          `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`,
-                        )
-                      }
-                    >
-                      📍
-                    </button>
-                  </div>
+
+                <div className="event-map-embed">
+                  <iframe
+                    title={`Bản đồ ${event.location}`}
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(event.location + ', ' + event.address)}&output=embed`}
+                    width="100%"
+                    height="350"
+                    style={{ border: 0, borderRadius: '12px' }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
               </div>
-            );
-          })}
-      </div>
-
-    </>
+            </div>
+          );
+        })}
+    </div>
   );
 };
 
@@ -608,10 +600,10 @@ const Countdown = ({ remoteConfig }) => {
  */
 const Timeline = () => {
   const icons = [
-    "/wedding-invitation/gate-2.png",
-    "/wedding-invitation/nhan-cuoi-2.png",
-    "/wedding-invitation/ly-2.png",
-    "/wedding-invitation/hoa-cam-tay-2.png",
+    `${import.meta.env.BASE_URL}gate-2.png`,
+    `${import.meta.env.BASE_URL}nhan-cuoi-2.png`,
+    `${import.meta.env.BASE_URL}ly-2.png`,
+    `${import.meta.env.BASE_URL}hoa-cam-tay-2.png`,
   ];
 
   return (
@@ -775,14 +767,13 @@ const BankInfo = () => {
           <div className="bank-card card" data-aos="flip-right">
             <h3>
               Mừng cưới{" "}
-              <span style={{ display: "inline-block" }}>Cô dâu</span>
+              <span style={{ display: "inline-block" }}>cô dâu</span>
             </h3>
             <p className="bank-name">{config.bankInfo.bride.bank}</p>
             <p className="bank-account">STK: {config.bankInfo.bride.accountNumber}</p>
             <p className="bank-owner">Tên: {config.bankInfo.bride.accountName}</p>
             <button
-              className={`copy-btn ${copiedBride ? "copied" : ""}`}
-              onClick={() =>
+              className={`copy-btn ${copiedBride ? "copied" : ""}`} onClick={() =>
                 handleCopy(config.bankInfo.bride.accountNumber, "bride")
               }
             >
@@ -827,7 +818,7 @@ function App() {
 
       // Add timeline icons
       const timelineIcons = [
-        "/wedding-invitation/gate-2.png",
+        "/Vu Quy Invitation/public/gate-2.png",
         "/wedding-invitation/nhan-cuoi-2.png",
         "/wedding-invitation/ly-2.png",
         "/wedding-invitation/hoa-cam-tay-2.png",
