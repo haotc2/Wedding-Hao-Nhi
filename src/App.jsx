@@ -283,7 +283,7 @@ const Couple = ({ remoteConfig }) => {
 
           <div style={{ marginBottom: "3rem" }}>
             <p className="classic-announce-text">
-              LỄ TÂN HÔN ĐƯỢC CỬ HÀNH <br className="mobile-break" /> TẠI TƯ GIA
+              LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH <br className="mobile-break" /> TẠI TƯ GIA
             </p>
             <p className="classic-ceremony-time">VÀO LÚC 9:00</p>
           </div>
