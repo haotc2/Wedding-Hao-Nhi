@@ -497,7 +497,7 @@ body {
   display: grid;
   grid-template-columns: 1fr auto auto auto 1fr;
   align-items: center;
-  margin: 2rem 0;
+  margin: 10px 50px 20px 10px;
   color: #777;
   width: 100%;
 }
@@ -984,14 +984,24 @@ body {
 }
 
 .event-address-new {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #7a6f68;
   margin-bottom: 1.2rem;
-  max-width: 500px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.5;
 }
+
+.address-street {
+  display: inline;
+}
+
+.address-location {
+  display: inline;
+  white-space: normal;
+}
+
 
 .event-time-new {
   font-size: 1.2rem;
@@ -1577,16 +1587,9 @@ body {
   }
 
   .event-address-new {
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
-
-  .address-street {
-    display: block;
-  }
-
-  .address-location {
-    display: inline;
+    padding: 0 0.5rem;
+    line-height: 1.4;
+    font-size: 0.9rem;
   }
 
   .event-arch-wrapper {
@@ -1614,6 +1617,11 @@ body {
   .date-year-small {
     font-size: 0.85rem;
     font-weight: 500;
+  }
+
+  .event-lunar-new {
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 }
 
@@ -1976,5 +1984,17 @@ body {
 
   .loading-progress-container {
     width: 160px;
+  }
+}
+
+/* Phones only - Force address to 2 lines */
+@media (max-width: 600px) {
+  .address-street {
+    display: block;
+  }
+
+  .address-location {
+    display: block;
+    white-space: nowrap;
   }
 }

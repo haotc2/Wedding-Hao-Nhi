@@ -295,7 +295,7 @@ const Couple = ({ remoteConfig }) => {
             <div className="classic-date-divider"></div>
             <span className="classic-date-side">{eventData.year}</span>
           </div>
-          <p className="classic-lunar">(TỨC NGÀY {eventData.lunarDate.toUpperCase()})</p>
+          <p className="classic-lunar">Nhằm ngày {eventData.lunarDate}</p>
         </div>
       </div>
     </section>
