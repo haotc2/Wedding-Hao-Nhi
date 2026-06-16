@@ -37,7 +37,7 @@ export const config = {
         "", // Arch image
     },
     {
-      title: "LỄ CƯỚI NHÀ TRAI",
+      title: "HÔN LỄ NHÀ TRAI",
       location: "QUEEN PLAZA",
       address: "29B Trần Hưng Đạo, Phường An Đông, TP.Hồ Chí Minh",
       time: "18:00",

@@ -742,8 +742,8 @@ const BankInfo = () => {
     <section className="bank-info-section">
       <div className="container">
         <h2 data-aos="fade-up">
-          Gửi quà đến{" "}
-          <span style={{ display: "inline-block" }}>Cô dâu & Chú rể</span>
+          Gửi quà đến <br className="mobile-break" />
+          Cô dâu & Chú rể
         </h2>
         <div className="bank-grid">
           <div className="bank-card card" data-aos="flip-left">
