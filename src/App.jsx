@@ -39,33 +39,35 @@ const LoadingScreen = ({ progress, isFinished }) => {
   );
 };
 
-const MusicPlayer = () => {
+const MusicPlayer = ({ playOnReady = false }) => {
 
   const [isPlaying, setIsPlaying] = useState(true); // Default to on
   const audioRef = React.useRef(null);
 
   useEffect(() => {
-    // Initial attempt to autoplay
-    const playAudio = () => {
-      audioRef.current
-        ?.play()
-        .then(() => setIsPlaying(true))
-        .catch(() => {
-          setIsPlaying(false);
-          // FALLBACK: Start on first user interaction anywhere
-          const startOnInteraction = () => {
-            audioRef.current?.play();
-            setIsPlaying(true);
-            document.removeEventListener("click", startOnInteraction);
-            document.removeEventListener("touchstart", startOnInteraction);
-          };
-          document.addEventListener("click", startOnInteraction);
-          document.addEventListener("touchstart", startOnInteraction);
-        });
-    };
+    if (playOnReady) {
+      // Initial attempt to autoplay when ready
+      const playAudio = () => {
+        audioRef.current
+          ?.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            setIsPlaying(false);
+            // FALLBACK: Start on first user interaction anywhere
+            const startOnInteraction = () => {
+              audioRef.current?.play();
+              setIsPlaying(true);
+              document.removeEventListener("click", startOnInteraction);
+              document.removeEventListener("touchstart", startOnInteraction);
+            };
+            document.addEventListener("click", startOnInteraction);
+            document.addEventListener("touchstart", startOnInteraction);
+          });
+      };
 
-    playAudio();
-  }, []);
+      playAudio();
+    }
+  }, [playOnReady]);
 
   const togglePlay = () => {
     if (isPlaying) {
@@ -807,6 +809,22 @@ function App() {
   });
 
   useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    // Cuộn lên đầu trang khi refresh
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     const preloadAllImages = async (data) => {
       const urls = [];
       const add = (url, width) => {

@@ -494,10 +494,10 @@ body {
 
 /* Classic Date Row */
 .classic-date-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 10px 50px 20px 10px;
+  margin: 10px auto 20px auto;
   color: #777;
   width: 100%;
 }
