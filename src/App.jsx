@@ -226,6 +226,22 @@ const Couple = ({ remoteConfig }) => {
   const eventData = config.events.find((ev) => ev.title.includes("NHÀ TRAI")) || config.events[0];
   const [day, month] = eventData.dayMonth.split('/');
 
+  const formatAddress = (address) => {
+    if (!address) return address;
+    const parts = address.split(',');
+    if (parts.length > 1) {
+      const lastPart = parts.pop();
+      return (
+        <>
+          {parts.join(',')},
+          <br className="mobile-break" />
+          {lastPart}
+        </>
+      );
+    }
+    return address;
+  };
+
   return (
     <section className="couple bg-white">
       <div className="container">
@@ -240,7 +256,7 @@ const Couple = ({ remoteConfig }) => {
               <span className="classic-parent-title">Ông Bà</span>
               <p className="classic-parent-name">{groomFather}</p>
               <p className="classic-parent-name">{groomMother}</p>
-              <p className="classic-parent-address">{groomAddress}</p>
+              <p className="classic-parent-address">{formatAddress(groomAddress)}</p>
             </div>
 
             <div className="classic-divider-line"></div>
@@ -249,7 +265,7 @@ const Couple = ({ remoteConfig }) => {
               <span className="classic-parent-title">Ông Bà</span>
               <p className="classic-parent-name">{brideFather}</p>
               <p className="classic-parent-name">{brideMother}</p>
-              <p className="classic-parent-address">{brideAddress}</p>
+              <p className="classic-parent-address">{formatAddress(brideAddress)}</p>
             </div>
           </div>
 
@@ -415,11 +431,16 @@ const Events = ({ remoteConfig }) => {
   return (
     <div className="events-container-new">
       {config.events
-        .filter((ev) => ev.title.includes("NHÀ TRAI"))
         .map((event) => {
           const originalIdx = config.events.indexOf(event);
           const [day, month] = event.dayMonth.split("/");
-          const remoteKey = `event${originalIdx + 1}image`;
+          let remoteKey = `event${originalIdx + 1}image`;
+          if (event.title.includes("NHÀ TRAI") || event.title.includes("TIỆC CƯỚI")) {
+            remoteKey = "event2image";
+          } else if (event.title.includes("NHÀ GÁI")) {
+            remoteKey = "event1image";
+          }
+          
           const eventImage = getDirectLink(
             remoteConfig?.[remoteKey] || event.image,
             800,
@@ -553,7 +574,6 @@ const Countdown = ({ remoteConfig }) => {
         >
           <div className="countdown-content-new">
             <p className="countdown-subtitle-new">CÙNG ĐẾM NGƯỢC THỜI GIAN</p>
-            <h2 className="countdown-title-new">Save The Date</h2>
 
             <div className="countdown-grid-new-banner">
               {["days", "hours", "minutes", "seconds"].map((unit, index) => {
@@ -979,7 +999,7 @@ function App() {
             data-aos-delay="200"
             style={{ color: "rgba(255,255,255,0.9)" }}
           >
-            Sự hiện diện của bạn sẽ khiến hôn lễ của chúng tôi trở nên ý nghĩa
+            Sự hiện diện của quý khách sẽ khiến hôn lễ của chúng tôi trở nên ý nghĩa
             hơn bao giờ hết!
           </p>
         </div>

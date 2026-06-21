@@ -24,20 +24,20 @@ export const config = {
   },
   weddingDate: "2026-11-29T18:00:00", // Using 2026 to keep countdown active
   events: [
+    // {
+    //   title: "LỄ CƯỚI NHÀ GÁI",
+    //   location: "GOLDEN LOTUS",
+    //   address: "105B Đ. Hà Huy Giáp, Phường Trấn Biên, Đồng Nai",
+    //   time: "11:00",
+    //   dayOfWeek: "Thứ 7",
+    //   dayMonth: "28/11",
+    //   year: "2026",
+    //   lunarDate: "20 tháng 10 năm Bính Ngọ",
+    //   image:
+    //     "", // Arch image
+    // },
     {
-      title: "LỄ CƯỚI NHÀ GÁI",
-      location: "GOLDEN LOTUS",
-      address: "105B Đ. Hà Huy Giáp, Phường Trấn Biên, Đồng Nai",
-      time: "11:00",
-      dayOfWeek: "Thứ 7",
-      dayMonth: "28/11",
-      year: "2026",
-      lunarDate: "20 tháng 10 năm Bính Ngọ",
-      image:
-        "", // Arch image
-    },
-    {
-      title: "HÔN LỄ NHÀ TRAI",
+      title: "THÔNG TIN TIỆC CƯỚI",
       location: "QUEEN PLAZA",
       address: "29B Trần Hưng Đạo, Phường An Đông, TP.Hồ Chí Minh",
       time: "18:00",
@@ -53,7 +53,7 @@ export const config = {
     { time: "17:00", description: "Đón khách và chụp ảnh" },
     { time: "18:00", description: "Làm lễ" },
     { time: "18:30", description: "Khai tiệc" },
-    { time: "21:00", description: "Tung hoa và kết tiệc" },
+    { time: "21:00", description: "Kết tiệc" },
   ],
   gallery: [],
   bankInfo: {
