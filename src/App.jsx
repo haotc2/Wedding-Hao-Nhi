@@ -856,12 +856,12 @@ function App() {
 
       // Add timeline icons
       const timelineIcons = [
-        "/Vu Quy Invitation/public/gate-2.png",
-        "/wedding-invitation/nhan-cuoi-2.png",
-        "/wedding-invitation/ly-2.png",
-        "/wedding-invitation/hoa-cam-tay-2.png",
+        "gate-2.png",
+        "nhan-cuoi-2.png",
+        "ly-2.png",
+        "hoa-cam-tay-2.png",
       ];
-      timelineIcons.forEach(icon => urls.push(`${import.meta.env.BASE_URL}${icon.startsWith('/') ? icon.slice(1) : icon}`));
+      timelineIcons.forEach(icon => urls.push(`${import.meta.env.BASE_URL}${icon}`));
 
       // Add main assets
       add(data.config?.mainbackground || config.mainBackground, 1600);
