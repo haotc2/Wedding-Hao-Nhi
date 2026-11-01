@@ -39,60 +39,104 @@ const LoadingScreen = ({ progress, isFinished }) => {
   );
 };
 
-const MusicPlayer = ({ playOnReady = false }) => {
-
-  const [isPlaying, setIsPlaying] = useState(true); // Default to on
+const MusicPlayer = ({ remoteConfig }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = React.useRef(null);
 
   useEffect(() => {
-    if (playOnReady) {
-      // Initial attempt to autoplay when ready
-      const playAudio = () => {
-        audioRef.current
-          ?.play()
-          .then(() => setIsPlaying(true))
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.8;
+
+    const playAudio = () => {
+      if (!audio) return;
+      const promise = audio.play();
+      if (promise !== undefined) {
+        promise
+          .then(() => {
+            setIsPlaying(true);
+            cleanUp();
+          })
           .catch(() => {
+            // Trình duyệt chặn autoplay tự động nếu chưa có tương tác
             setIsPlaying(false);
-            // FALLBACK: Start on first user interaction anywhere
-            const startOnInteraction = () => {
-              audioRef.current?.play();
-              setIsPlaying(true);
-              document.removeEventListener("click", startOnInteraction);
-              document.removeEventListener("touchstart", startOnInteraction);
-            };
-            document.addEventListener("click", startOnInteraction);
-            document.addEventListener("touchstart", startOnInteraction);
           });
-      };
+      }
+    };
 
+    // 1. Thử tự động phát ngay khi vừa tải trang
+    playAudio();
+
+    // 2. Lắng nghe các tương tác đầu tiên của người dùng để kích hoạt phát ngay
+    const interactionEvents = [
+      "click",
+      "touchstart",
+      "touchend",
+      "pointerdown",
+      "keydown"
+    ];
+
+    const handleUserInteraction = () => {
       playAudio();
-    }
-  }, [playOnReady]);
+    };
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
+    interactionEvents.forEach((event) => {
+      window.addEventListener(event, handleUserInteraction, { passive: true });
+      document.addEventListener(event, handleUserInteraction, { passive: true });
+    });
+
+    const cleanUp = () => {
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, handleUserInteraction);
+        document.removeEventListener(event, handleUserInteraction);
+      });
+    };
+
+    return () => {
+      cleanUp();
+    };
+  }, []);
+
+  const togglePlay = (e) => {
+    e.stopPropagation();
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play().then(() => setIsPlaying(true)).catch(console.error);
     } else {
-      audioRef.current.play();
+      audio.pause();
+      setIsPlaying(false);
     }
-    setIsPlaying(!isPlaying);
   };
+
+  const audioSrc = encodeURI(
+    `${import.meta.env.BASE_URL}${remoteConfig?.audiourl || config.audioUrl}`
+  );
 
   return (
     <div className="music-player-new">
       <audio
         ref={audioRef}
-        src={`${import.meta.env.BASE_URL}${config.audioUrl}`}
+        src={audioSrc}
         loop
+        autoPlay
+        preload="auto"
+        playsInline
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
       />
       <button
         className={`music-toggle-new ${isPlaying ? "playing" : ""}`}
         onClick={togglePlay}
+        title={isPlaying ? "Tạm dừng nhạc" : "Phát nhạc"}
+        aria-label={isPlaying ? "Tạm dừng nhạc" : "Phát nhạc"}
       >
         <img
           src={`${import.meta.env.BASE_URL}play-icon-29.png`}
           alt="Music toggle"
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </button>
     </div>
@@ -1020,7 +1064,7 @@ function App() {
   return (
     <div className="App">
       <LoadingScreen progress={loadingProgress} isFinished={!isLoading} />
-      <MusicPlayer />
+      <MusicPlayer remoteConfig={remoteData.config} />
       <Hero remoteConfig={remoteData.config} />
       <Couple remoteConfig={remoteData.config} />
       <Gallery remoteGallery={remoteData.gallery} />
