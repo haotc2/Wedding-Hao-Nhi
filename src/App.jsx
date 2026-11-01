@@ -550,13 +550,8 @@ const Events = ({ remoteConfig }) => {
 
                 <div className="event-date-row-new">
                   <div className="date-box-side">
-                    <span className="date-day-week full-day">
-                      {event.dayOfWeek}
-                    </span>
-                    <span className="date-day-week short-day">
-                      {event.dayOfWeek === "Chủ Nhật"
-                        ? "C. Nhật"
-                        : event.dayOfWeek}
+                    <span className="date-day-week">
+                      {event.dayOfWeek ? event.dayOfWeek.toUpperCase() : "CHỦ NHẬT"}
                     </span>
                   </div>
                   <div className="date-center-main">
