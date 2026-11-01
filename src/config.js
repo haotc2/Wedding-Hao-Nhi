@@ -5,7 +5,7 @@ export const config = {
     "", // Background for Footer section fallback
   audioUrl: "Beautiful In White.mp3", // Background music
   groom: {
-    name: "Chí Hào",
+    name: "Tạ Chí Hào",
     bio: "Trưởng Nam",
     image:
       "",
@@ -14,7 +14,7 @@ export const config = {
     address: "Phường Bình Tây, TP.Hồ Chí Minh"
   },
   bride: {
-    name: "Phương Nhi",
+    name: "Nguyễn Hữu Phương Nhi",
     bio: "Trưởng Nữ",
     image:
       "",
