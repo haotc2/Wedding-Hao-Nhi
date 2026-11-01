@@ -174,9 +174,9 @@ const Hero = ({ remoteConfig }) => {
         <p className="hero-script-subtitle">Save The Date</p>
 
         <div className="hero-names-new">
-          <h1 className="hero-name-text">{config.groom.name}</h1>
+          <h1 className="hero-name-text">{config.groom.shortName || "Chí Hào"}</h1>
           <span className="hero-ampersand">&</span>
-          <h1 className="hero-name-text">{config.bride.name}</h1>
+          <h1 className="hero-name-text">{config.bride.shortName || "Phương Nhi"}</h1>
         </div>
 
         <div className="hero-date-block">
@@ -207,6 +207,27 @@ const Hero = ({ remoteConfig }) => {
  * ==========================================
  */
 const Couple = ({ remoteConfig }) => {
+  const renderCoupleName = (name) => {
+    if (!name) return "";
+    if (typeof name !== "string") return name;
+    if (name.includes("\n")) {
+      return name.split("\n").map((part, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && <br />}
+          {part}
+        </React.Fragment>
+      ));
+    }
+    if (name.toLowerCase() === "nguyễn hữu phương nhi") {
+      return (
+        <>
+          Nguyễn Hữu<br />Phương Nhi
+        </>
+      );
+    }
+    return name;
+  };
+
   const groomImage = getDirectLink(
     remoteConfig?.groomimage || config.groom.image,
     800,
@@ -251,20 +272,32 @@ const Couple = ({ remoteConfig }) => {
           <h2 className="couple-title" data-aos="fade-up" style={{ marginBottom: "3rem" }}>
             THÔNG TIN LỄ CƯỚI
           </h2>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", marginBottom: "3rem", gap: "0", flexWrap: "nowrap" }}>
-            <div style={{ flex: "1", minWidth: "0" }}>
-              <span className="classic-parent-title">Ông Bà</span>
-              <p className="classic-parent-name">{groomFather}</p>
-              <p className="classic-parent-name">{groomMother}</p>
+          <div className="classic-parents-container">
+            <div className="classic-parent-col">
+              <span className="classic-parent-title">NHÀ TRAI</span>
+              <p className="classic-parent-name">
+                <span className="classic-parent-prefix">Ông: </span>
+                {groomFather}
+              </p>
+              <p className="classic-parent-name">
+                <span className="classic-parent-prefix">Bà: </span>
+                {groomMother}
+              </p>
               <p className="classic-parent-address">{formatAddress(groomAddress)}</p>
             </div>
 
             <div className="classic-divider-line"></div>
 
-            <div style={{ flex: "1", minWidth: "0" }}>
-              <span className="classic-parent-title">Ông Bà</span>
-              <p className="classic-parent-name">{brideFather}</p>
-              <p className="classic-parent-name">{brideMother}</p>
+            <div className="classic-parent-col">
+              <span className="classic-parent-title">NHÀ GÁI</span>
+              <p className="classic-parent-name">
+                <span className="classic-parent-prefix">Ông: </span>
+                {brideFather}
+              </p>
+              <p className="classic-parent-name">
+                <span className="classic-parent-prefix">Bà: </span>
+                {brideMother}
+              </p>
               <p className="classic-parent-address">{formatAddress(brideAddress)}</p>
             </div>
           </div>
@@ -282,7 +315,7 @@ const Couple = ({ remoteConfig }) => {
             >
               <div className="card-overlay-gradient"></div>
               <div className="card-content">
-                <h3 className="card-name">{config.groom.name}</h3>
+                <h3 className="card-name">{renderCoupleName(config.groom.name)}</h3>
                 <p className="card-bio">{config.groom.bio}</p>
               </div>
             </div>
@@ -293,7 +326,7 @@ const Couple = ({ remoteConfig }) => {
             >
               <div className="card-overlay-gradient"></div>
               <div className="card-content">
-                <h3 className="card-name">{config.bride.name}</h3>
+                <h3 className="card-name">{renderCoupleName(config.bride.name)}</h3>
                 <p className="card-bio">{config.bride.bio}</p>
               </div>
             </div>
@@ -303,15 +336,17 @@ const Couple = ({ remoteConfig }) => {
             <p className="classic-announce-text">
               LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH <br className="mobile-break" /> TẠI TƯ GIA
             </p>
-            <p className="classic-ceremony-time">VÀO LÚC 9:00</p>
+            <p className="classic-ceremony-time">VÀO LÚC 11:00</p>
           </div>
 
           <div className="classic-date-row">
-            <span className="classic-date-side">C.NHẬT</span>
+            <span className="classic-date-side left">
+              {eventData.dayOfWeek ? eventData.dayOfWeek.toUpperCase() : "CHỦ NHẬT"}
+            </span>
             <div className="classic-date-divider"></div>
             <span className="classic-date-big">{day}.{month}</span>
             <div className="classic-date-divider"></div>
-            <span className="classic-date-side">{eventData.year}</span>
+            <span className="classic-date-side right">{eventData.year}</span>
           </div>
           <p className="classic-lunar">Nhằm ngày {eventData.lunarDate}</p>
         </div>
@@ -331,17 +366,36 @@ const Gallery = ({ remoteGallery }) => {
   const images =
     remoteGallery && remoteGallery.length > 0 ? remoteGallery : config.gallery;
 
-  const [displayCount, setDisplayCount] = useState(9); // Default 9
+  const getResponsiveCount = () => {
+    if (typeof window !== "undefined") {
+      const isMobile =
+        window.matchMedia("(max-width: 768px)").matches ||
+        window.innerWidth <= 768;
+      return isMobile ? 8 : 9;
+    }
+    return 8;
+  };
+
+  const [displayCount, setDisplayCount] = useState(getResponsiveCount);
 
   useEffect(() => {
     const handleResize = () => {
-      // 3 cols on desktop (>=768) -> 9 images (3 rows x 3 cols)
-      // 2 cols on mobile (<768) -> 8 images (4 rows x 2 cols)
-      setDisplayCount(window.innerWidth < 768 ? 8 : 9);
+      setDisplayCount(getResponsiveCount());
     };
-    handleResize(); // Initial check
+    handleResize();
+
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleResize);
+    }
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", handleResize);
+      }
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Display only part of images in the grid, but allow lightbox to view ALL
@@ -440,7 +494,7 @@ const Events = ({ remoteConfig }) => {
           } else if (event.title.includes("NHÀ GÁI")) {
             remoteKey = "event1image";
           }
-          
+
           const eventImage = getDirectLink(
             remoteConfig?.[remoteKey] || event.image,
             800,

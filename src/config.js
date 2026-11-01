@@ -6,6 +6,7 @@ export const config = {
   audioUrl: "Beautiful In White.mp3", // Background music
   groom: {
     name: "Tạ Chí Hào",
+    shortName: "Chí Hào",
     bio: "Trưởng Nam",
     image:
       "",
@@ -15,6 +16,7 @@ export const config = {
   },
   bride: {
     name: "Nguyễn Hữu Phương Nhi",
+    shortName: "Phương Nhi",
     bio: "Trưởng Nữ",
     image:
       "",
@@ -50,9 +52,9 @@ export const config = {
     },
   ],
   timeline: [
-    { time: "17:00", description: "Đón khách và chụp ảnh" },
-    { time: "18:00", description: "Làm lễ" },
-    { time: "18:30", description: "Khai tiệc" },
+    { time: "18:00", description: "Đón khách và chụp ảnh" },
+    { time: "19:00", description: "Làm lễ" },
+    { time: "19:30", description: "Khai tiệc" },
     { time: "21:00", description: "Kết tiệc" },
   ],
   gallery: [],

@@ -425,37 +425,78 @@ body {
 }
 
 /* Classic Invite Specifics */
+.classic-parents-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  gap: 1.5rem;
+}
+
+.classic-parent-col {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
 .classic-parent-title {
-  font-size: 0.9rem;
-  color: #888;
+  display: block;
+  font-size: 1.15rem;
+  color: #777;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.6rem;
 }
 
 .classic-parent-name {
   color: #8c0000;
   font-weight: bold;
-  margin: 0.4rem 0;
-  font-size: 1rem;
+  margin: 0.45rem 0;
+  font-size: 1.3rem;
+}
+
+.classic-parent-prefix {
+  font-weight: 400;
 }
 
 .classic-parent-address {
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 1.05rem;
+  color: #777;
   margin-top: 0.8rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {
+  .classic-parents-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .classic-parent-col {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+  }
+
   .classic-parent-title {
-    font-size: 0.65rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
   }
 
   .classic-parent-name {
-    font-size: 0.7rem;
+    font-size: 1.15rem;
+    white-space: nowrap;
+    margin: 0.35rem 0;
   }
 
   .classic-parent-address {
-    font-size: 0.65rem;
+    font-size: 0.95rem;
     margin-top: 0.4rem;
+    line-height: 1.4;
   }
 }
 
@@ -499,33 +540,31 @@ body {
   align-items: center;
   margin: 10px auto 20px auto;
   color: #777;
+  max-width: 360px;
   width: 100%;
 }
 
 .classic-date-side {
-  font-size: 1rem;
+  font-size: 1.05rem;
   white-space: nowrap;
+  flex: 1;
+  letter-spacing: 1px;
 }
 
-.classic-day-short {
-  display: none;
-}
-
-.classic-date-side:first-child {
-  justify-self: end;
+.classic-date-side.left {
   text-align: right;
 }
 
-.classic-date-side:last-child {
-  justify-self: start;
+.classic-date-side.right {
   text-align: left;
 }
 
 .classic-date-divider {
   width: 1px;
-  height: 30px;
+  height: 35px;
   background-color: #ccc;
   margin: 0 1rem;
+  flex-shrink: 0;
 }
 
 .classic-date-big {
@@ -533,6 +572,7 @@ body {
   color: #8c0000;
   font-family: var(--font-body);
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .classic-year {
@@ -550,25 +590,23 @@ body {
 }
 
 @media (max-width: 768px) {
+  .classic-date-row {
+    max-width: 300px;
+    margin: 8px auto 16px auto;
+  }
+
   .classic-date-side {
-    font-size: 0.7rem;
-  }
-
-  .classic-day-full {
-    display: none;
-  }
-
-  .classic-day-short {
-    display: inline;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
   }
 
   .classic-date-divider {
-    height: 20px;
+    height: 24px;
     margin: 0 0.6rem;
   }
 
   .classic-date-big {
-    font-size: 2rem;
+    font-size: 2.3rem;
   }
 
   .classic-year {
@@ -576,24 +614,55 @@ body {
   }
 
   .classic-lunar {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
 }
 
-/* Vertical line divider between parents */
+@media (max-width: 380px) {
+  .classic-date-row {
+    max-width: 270px;
+  }
+
+  .classic-date-side {
+    font-size: 0.75rem;
+  }
+
+  .classic-date-divider {
+    height: 20px;
+    margin: 0 0.4rem;
+  }
+
+  .classic-date-big {
+    font-size: 2rem;
+  }
+}
+
+/* Divider between parents */
 .classic-divider-line {
   flex-shrink: 0;
   width: 1px;
   background-color: #8c0000;
   align-self: stretch;
-  margin: 0 0.8rem;
+  margin: 0 1rem;
   min-height: 120px;
 }
 
 @media (max-width: 768px) {
   .classic-divider-line {
-    margin: 0 0.5rem;
-    min-height: 100px;
+    width: 80%;
+    max-width: 280px;
+    height: 1px;
+    min-height: unset;
+    background-color: #8c0000;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(140, 0, 0, 0.4) 15%,
+      rgba(140, 0, 0, 0.4) 85%,
+      transparent
+    );
+    margin: 0.4rem auto;
+    align-self: center;
   }
 }
 
@@ -649,6 +718,7 @@ body {
   font-size: 2.2rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
+  line-height: 1.25;
 }
 
 .card-date {
@@ -1528,6 +1598,16 @@ body {
     gap: 10px;
   }
 
+  .gallery-item:nth-child(n+9) {
+    display: none;
+  }
+
+  .gallery-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 5px);
+  }
+
   .timeline-item .dot::after {
     height: 60px;
     /* Adjust for longer text wrapping on mobile */
@@ -1536,6 +1616,11 @@ body {
   .couple-card {
     height: 600px;
     /* Taller height on mobile to prevent stretching */
+  }
+
+  .card-name {
+    font-size: 1.8rem;
+    line-height: 1.25;
   }
 
   .music-player-new {
@@ -1679,15 +1764,21 @@ body {
   .short-day {
     display: inline;
   }
-}
 
-@media (max-width: 400px) {
-  .full-name-text {
-    display: none;
+  .card-name {
+    font-size: 1.6rem;
   }
 
-  .short-name-text {
-    display: inline;
+  .classic-parent-title {
+    font-size: 0.95rem;
+  }
+
+  .classic-parent-name {
+    font-size: 1.05rem;
+  }
+
+  .classic-parent-address {
+    font-size: 0.85rem;
   }
 }
 
