@@ -999,8 +999,7 @@ function App() {
             data-aos-delay="200"
             style={{ color: "rgba(255,255,255,0.9)" }}
           >
-            Sự hiện diện của quý khách sẽ khiến hôn lễ của chúng tôi trở nên ý nghĩa
-            hơn bao giờ hết!
+            Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi!
           </p>
         </div>
       </footer>
